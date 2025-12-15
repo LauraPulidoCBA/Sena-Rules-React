@@ -23,7 +23,7 @@ export default function App() {
       rule.title.toLowerCase().includes(text) ||
       rule.category.toLowerCase().includes(text);
 
-    const matchesCategory = category === "" || rule.category === category;
+    const matchesCategory = category === "" || rule.category.toLowerCase() === category.toLowerCase();
 
     return matchesText && matchesCategory;
   });
@@ -33,19 +33,20 @@ export default function App() {
   return (
     <>
       <Header />
+      <main> 
+        <SearchBar onSearch={setSearchText} />
+        <CategoryFilter onFilter={setCategory} />
 
-      <SearchBar onSearch={setSearchText} />
-      <CategoryFilter onFilter={setCategory} />
+        <ComplianceCounter
+          total={rulesData.length}
+          completed={completedCount}
+        />
 
-      <ComplianceCounter
-        total={rulesData.length}
-        completed={completedCount}
-      />
-
-      <RuleList
-        rules={filteredRules}
-        onCompliant={handleCompliant}
-      />
+        <RuleList
+          rules={filteredRules}
+          onCompliant={handleCompliant}
+        />
+      </main>
 
       <Footer />
     </>

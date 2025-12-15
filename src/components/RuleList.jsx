@@ -12,6 +12,8 @@ export default function RuleList({ rules, onCompliant }) {
                 key={rule.id} 
                 title={rule.title} 
                 category={rule.category}
+                description={rule.description}
+                image={rule.image}
                 onCompliant={(state) => onCompliant(rule.id, state)}
             />
             ))}
